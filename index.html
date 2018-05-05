@@ -26,22 +26,26 @@
             <h4>
                 <br>Add A Route</h4>
             <br>
-            <h5>Start Location</h5>
-            <input type="text ">
-            <h5>
-                <br>End Location</h5>
-            <input type="text ">
-            <h5>
-                <br>Was it Safe?</h5>
-            <select>
-                <option value="volvo ">Very Unsafe</option>
-                <option value="saab ">Slightly Unsafe</option>
-                <option value="mercedes ">Slightly Safe</option>
-                <option value="audi ">Very Safe</option>
-            </select>
-            <br>
+            <div class="form-group">
+                <label for="start">Start Location:</label>
+                <input type="text" class="form-control" id="start">
+            </div>
+            <div class="form-group">
+                <label for="end">End Location:</label>
+                <input type="text" class="form-control" id="end">
+            </div>
+            <div class="form group">
+                <label for="safe">Was it Safe?</label>
+                <select class="form-control" id="safe">
+                    <option>Very Unsafe</option>
+                    <option>Slightly Unsafe</option>
+                    <option>Slightly Safe</option>
+                    <option>Very Safe</option>
+                </select>
+            </div>
             <br>
             <button type="button" class="btn btn-primary">Submit</button>
+            <br><br>
         </div>
         <div class="col-md-9 ">
             <div style="width: 100%; height: 540px;" id="map-container"></div>
