@@ -20,13 +20,20 @@
   <h1>SafeMe</h1>
   <div class="row h-100">
     <div class="col-md-4">
-      Test Col
+      <div class="panel-group">
+        <div class="panel panel-primary">
+          <div class="panel-heading">Panel Header</div>
+          <div class="panel-body">Panel Content</div>
+        </div>
+      </div>
     </div>
     <div class="col-md-8">
       <input id="pac-input" class="controls" type="text" placeholder="Enter a location">
       <div id="map"></div>
     </div>
   </div>
+  </div>
+  <script src="assets/js/jquery-3.3.1.min.js"></script>
   <script src="assets/js/bootstrap.min.js"></script>
   <script src="assets/js/maps.js"></script>
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCyAODsfLfXcMCwY_2TMP7fT2XxJAUECqQ&libraries=places&callback=initMap"
