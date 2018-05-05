@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 // Initialize the platform object:
 var platform = new H.service.Platform({
   'app_id': 'HJcQUexJFd6ee5XJaCQ1',
@@ -21,3 +22,5 @@ var mapOptions = {
 var map = new H.Map(mapContainer, defaultLayers.normal.map, mapOptions);
 var behavior = new H.mapevents.Behavior(new H.mapevents.MapEvents(map));
 var ui = H.ui.UI.createDefault(map, defaultLayers);
+=======
+>>>>>>> d882fdd26a1a1d0cb54c49d824ffeb8ba9e2dd5b
