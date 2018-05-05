@@ -17,18 +17,23 @@
 </head>
 
 <body>
-  <div class="row" style="height: 100%;"> 
-    <div class="col-md-4 text-center">
+  <div class="row" style="height: 100%;">
+    <div class="col-md-3 text-center">
       <h4>Add a route</h4>
       <br>
       <h5>Start</h5>
-      <input type="text" placeholder="Enter a location">
+      <input type="text">
       <h5>End</h5>
-      <input type="text" placeholder="Enter a location">
+      <input type="text">
       <h5>How safe?</h5>
-      
+      <select>
+        <option value="volvo">Very Unsafe</option>
+        <option value="saab">Slightly Unsafe</option>
+        <option value="mercedes">Slightly Safe</option>
+        <option value="audi">Very Safe</option>
+      </select>
     </div>
-    <div class="col-md-8">
+    <div class="col-md-9">
       <input id="pac-input" class="controls" type="text" placeholder="Enter a location">
       <div id="map"></div>
     </div>
