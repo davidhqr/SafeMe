@@ -55,9 +55,11 @@ h1, h2, h3, h4, h5, h6 {
       float: none;
     }
   }
-
-  .map {
-    width: 100vw;
-    height: 100vh;
-    position: relative;
+    .map-container {
+        position: relative;
+        width: 100%;
+    }
+    .map-container:before {
+        display: block;
+        padding-top: 100%; 	/* initial ratio of 1:1*/
     }
