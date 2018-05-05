@@ -5,14 +5,14 @@ h1, h2, h3, h4, h5, h6 {
 /* Style the header with a grey background and some padding */
 .header {
     overflow: hidden;
-    background-color: #f1f1f1;
+    background-color: #9B59B6;
     padding: 20px 10px;
   }
   
   /* Style the header links */
   .header a {
     float: left;
-    color: black;
+    color: white;
     text-align: center;
     padding: 12px;
     text-decoration: none;
@@ -35,7 +35,7 @@ h1, h2, h3, h4, h5, h6 {
   
   /* Style the active/current link*/
   .header a.active {
-    background-color: dodgerblue;
+    background-color: #22A7F0;
     color: white;
   }
   
@@ -55,11 +55,9 @@ h1, h2, h3, h4, h5, h6 {
       float: none;
     }
   }
-    .map-container {
-        position: relative;
-        width: 100%;
-    }
-    .map-container:before {
-        display: block;
-        padding-top: 100%; 	/* initial ratio of 1:1*/
+
+  .map {
+    width: 100vw;
+    height: 100vh;
+    position: relative;
     }
