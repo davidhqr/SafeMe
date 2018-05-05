@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/davidhqr/SafeMe/issues"
   },
-  "homepage": "https://github.com/davidhqr/SafeMe#readme"
+  "homepage": "https://github.com/davidhqr/SafeMe#readme",
+  "dependencies": {
+    "express": "^4.16.3"
+  }
 }
