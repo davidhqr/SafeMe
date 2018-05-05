@@ -1,10 +1,6 @@
 h1, h2, h3, h4, h5, h6 {
     text-align: center;
 }
-#map {
-    height: 500px;
-    width: 100%;
-  }
 
 /* Style the header with a grey background and some padding */
 .header {
@@ -59,3 +55,9 @@ h1, h2, h3, h4, h5, h6 {
       float: none;
     }
   }
+
+  .map {
+    width: 100vw;
+    height: 100vh;
+    position: relative;
+    }

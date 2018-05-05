@@ -3,14 +3,13 @@ var platform = new H.service.Platform({
     'app_code': '_q7W4N0oGEkEG5RvgTXM0g'
 });
 
-// Obtain the default map types from the platform object:
 var defaultLayers = platform.createDefaultLayers();
+var mapContainer = document.getElementById('map-container');
 
-// Instantiate (and display) a map object:
 var map = new H.Map(
-  document.getElementById('mapContainer'),
-  defaultLayers.normal.map,
-  {
-    zoom: 10,
-    center: { lat: 43.6052, lng: -79.6032 }
-  });
+    mapContainer,
+    defaultLayers.normal.map);
+
+window.addEventListener('resize', function () {
+    map.getViewPort().resize();
+});
