@@ -123,6 +123,16 @@ $(() => {
         }
         alert("Submitted! Route guidance will take this region into account.");
     });
+
+    $("#clear2").click(() => {
+        document.getElementById('start').value = "";
+        document.getElementById('end').value = "";
+        document.getElementById('safe').value = "Select";
+        document.getElementById('start-switch').checked = true;
+        document.getElementById('end-switch').checked = false;
+        document.getElementById("start").disabled = false;
+        document.getElementById("end").disabled = true;
+    });
 });
 
 function toggle(element) {
