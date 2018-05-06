@@ -59,6 +59,10 @@ $(() => {
     });
 });
 
+function toggle(elem) {
+
+}
+
 function getCoords(stringLoc) {
     var geocoder = platform.getGeocodingService();
     var geocodingParams = { searchText: stringLoc };
