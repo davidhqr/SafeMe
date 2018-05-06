@@ -28,6 +28,7 @@ $(() => {
         //$.post('http://localhost:3000/messages', message);
         var origin = getCoords($("#origin").val());
         var destination = getCoords($("#destination").val());
+        console.log(origin);
         calculateRoute(platform, origin, destination);
     });
 });
@@ -35,12 +36,19 @@ $(() => {
 function getCoords(stringLoc) {
     var geocoder = platform.getGeocodingService();
     var geocodingParams = { searchText: stringLoc };
+    var location;
     geocoder.geocode(geocodingParams, (result) => {
-        return result.Response.View[0].Result[0].Location.DisplayPosition.Latitude + ","
-            + result.Response.View[0].Result[0].Location.DisplayPosition.Longitude;
+        location = String(result.Response.View[0].Result[0].Location.DisplayPosition.Latitude) + ","
+            + String(result.Response.View[0].Result[0].Location.DisplayPosition.Longitude);
     }, (error) => {
         alert("error!");
+        return;
     });
+    return location;
+}
+
+function doCall(urlToCall, callback) {
+
 }
 
 function calculateRoute(platform, origin, destination) {
@@ -50,8 +58,8 @@ function calculateRoute(platform, origin, destination) {
         representation: 'display',
         routeattributes: 'summary,shape,legs',
         maneuverattributes: 'direction,action',
-        waypoint0: origin,
-        waypoint1: destination
+        waypoint0: "43.6629,-79.3957",
+        waypoint1: "43.7615,-79.4111"
     };
     router.calculateRoute(routeRequestParams, (result) => {
         console.log(result);
