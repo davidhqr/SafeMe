@@ -39,7 +39,7 @@ function setUpClickListener(amap) {
             var rect = new H.map.Rect(new H.geo.Rect(lat, long, nums[0], nums[1]));
             map.addObject(rect);
         } else {
-            
+
         }
     });
 }
@@ -48,6 +48,7 @@ var ui = H.ui.UI.createDefault(map, defaultLayers);
 var bubble;
 
 $(() => {
+    document.getElementById("start-switch").checked = true;
     $("#go").click(() => {
         var message = { Origin: $("#origin").val(), Destination: $("#destination").val() };
         //$.post('http://localhost:3000/messages', message);
