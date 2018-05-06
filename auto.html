@@ -1,22 +1,40 @@
 <!DOCTYPE html>
-    <html>
-      <head>
-        <link type="text/css" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500">
-        <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&libraries=places"></script>
-        <script>
-            var autocomplete;
-            function initialize() {
-              autocomplete = new google.maps.places.Autocomplete(
-                  /** @type {HTMLInputElement} */(document.getElementById('autocomplete')),
-                  { types: ['geocode'] });
-              google.maps.event.addListener(autocomplete, 'place_changed', function() {
-              });
+<html>
+
+<head>
+    <link type="text/css" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500">
+    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&libraries=places"></script>
+    <script>
+        function initialize() {
+
+            var acInputs = document.getElementsByClassName("autocomplete");
+
+            for (var i = 0; i < acInputs.length; i++) {
+
+                var autocomplete = new google.maps.places.Autocomplete(acInputs[i]);
+                autocomplete.inputId = acInputs[i].id;
+
+                google.maps.event.addListener(autocomplete, 'place_changed', function () {
+                    document.getElementById("log").innerHTML = 'You used input with id ' + this.inputId;
+                });
             }
-        </script>
-      </head>
-      <body onload="initialize()">
-        <div id="locationField">
-          <input id="autocomplete" placeholder="Enter your address" onFocus="geolocate()" type="text"></input>
-        </div>
-      </body>
-    </html>
+        }
+    </script>
+</head>
+
+<body onload="initialize()">
+    <div id="locationField">
+        <input class="autocomplete" id="ac1" placeholder="Enter your address" type="text"></input>
+        <br />
+        <br />
+        <input class="autocomplete" id="ac2" placeholder="Enter your address" type="text"></input>
+        <br />
+        <br />
+        <input class="autocomplete" id="ac3" placeholder="Enter your address" type="text"></input>
+        <br />
+        <br />
+        <span id="log"></span>
+    </div>
+</body>
+
+</html>
