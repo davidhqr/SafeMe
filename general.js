@@ -29,17 +29,58 @@ function setUpClickListener(amap) {
         var lng = coord.lng.toFixed(4);
         var coordStr = String(lat) + "," + String(lng);
 
-        if (start) {
+        if (document.getElementById('start-switch').checked) {
             document.getElementById('start').value = coordStr;
             var end = document.getElementById('end').value;
             var nums = end.split(",");
             for (var i = 0; i < nums.length; i++) {
                 nums[i] = parseInt(nums[i]);
             }
-            var rect = new H.map.Rect(new H.geo.Rect(lat, long, nums[0], nums[1]));
+            var rect;
+            if (lat > nums[0]) {
+                if (lng > nums[1]) {
+                    console.log("1");
+                    rect = new H.map.Rect(new H.geo.Rect(lat, nums[1], nums[0], lng));
+                } else {
+                    rect = new H.map.Rect(new H.geo.Rect(lat, lng, nums[0], nums[1]));
+                    console.log("2");
+                }
+            } else {
+                if (lng > nums[1]) {
+                    rect = new H.map.Rect(new H.geo.Rect(nums[0], nums[1], lat, lng));
+                    console.log("3");
+                } else {
+                    rect = new H.map.Rect(new H.geo.Rect(nums[0], lng, lat, nums[1]));
+                    console.log("4");
+                }
+            }
             map.addObject(rect);
         } else {
-
+            document.getElementById('end').value = coordStr;
+            var start = document.getElementById('start').value;
+            var nums = start.split(",");
+            for (var i = 0; i < nums.length; i++) {
+                nums[i] = parseInt(nums[i]);
+            }
+            var rect;
+            if (lat > nums[0]) {
+                if (lng > nums[1]) {
+                    console.log("1");
+                    rect = new H.map.Rect(new H.geo.Rect(lat, nums[1], nums[0], lng));
+                } else {
+                    rect = new H.map.Rect(new H.geo.Rect(lat, lng, nums[0], nums[1]));
+                    console.log("2");
+                }
+            } else {
+                if (lng > nums[1]) {
+                    rect = new H.map.Rect(new H.geo.Rect(nums[0], nums[1], lat, lng));
+                    console.log("3");
+                } else {
+                    rect = new H.map.Rect(new H.geo.Rect(nums[0], lng, lat, nums[1]));
+                    console.log("4");
+                }
+            }
+            map.addObject(rect);
         }
     });
 }
@@ -57,10 +98,23 @@ $(() => {
         console.log(origin);
         calculateRoute(platform, origin, destination);
     });
+    map.addObject(new H.map.Rect(new H.geo.Rect(43.6652,-79.4101, 43.6538,-79.3610)));
 });
 
-function toggle(elem) {
-
+function toggle(element) {
+    if (element.checked) {
+        if (element.id === "start-switch") {
+            document.getElementById('end-switch').checked = false;
+        } else {
+            document.getElementById('start-switch').checked = false;
+        }
+    } else {
+        if (element.id === "start-switch") {
+            document.getElementById('end-switch').checked = true;
+        } else {
+            document.getElementById('start-switch').checked = true;
+        }
+    }
 }
 
 function getCoords(stringLoc) {
@@ -75,10 +129,6 @@ function getCoords(stringLoc) {
         return;
     });
     return location;
-}
-
-function doCall(urlToCall, callback) {
-
 }
 
 function calculateRoute(platform, origin, destination) {
