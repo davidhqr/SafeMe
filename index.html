@@ -2,101 +2,102 @@
 <html lang="en">
 
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="viewport" content="initial-scale=1.0, width=device-width" />
-    <link rel="stylesheet" type="text/css" href="assets/css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="https://js.cit.api.here.com/v3/3.0/mapsjs-ui.css">
-    <link rel="stylesheet" type="text/css" href="assets/css/general.css">
-    <link type="text/css" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500">
-    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&libraries=places"></script>
-    <script>
-        function initialize() {
-            var acInputs = document.getElementsByClassName("autocomplete");
-            for (var i = 0; i < acInputs.length; i++) {
-                var autocomplete = new google.maps.places.Autocomplete(acInputs[i]);
-                autocomplete.inputId = acInputs[i].id;
-                google.maps.event.addListener(autocomplete, 'place_changed', function () {
-                    document.getElementById("log").innerHTML = 'You used input with id ' + this.inputId;
-                });
-            }
-        }
-    </script>
-    <div class="header">
-        <a href="#default" class="logo">SafeMe</a>
-        <div class="header-right">
-            <a class="active" href="#home">Home</a>
-            <a href="#contact">Contact</a>
-            <a href="#about">About</a>
-        </div>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+  <link rel="stylesheet" type="text/css" href="assets/css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="https://js.cit.api.here.com/v3/3.0/mapsjs-ui.css">
+  <link rel="stylesheet" type="text/css" href="assets/css/general.css">
+  <link type="text/css" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500">
+  <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&libraries=places"></script>
+  <script>
+    function initialize() {
+      var acInputs = document.getElementsByClassName("autocomplete");
+      for (var i = 0; i < acInputs.length; i++) {
+        var autocomplete = new google.maps.places.Autocomplete(acInputs[i]);
+        autocomplete.inputId = acInputs[i].id;
+        google.maps.event.addListener(autocomplete, 'place_changed', function () {
+          //if (this.inputId != null)
+          //  document.getElementById("log").innerHTML = 'You used input with id ' + this.inputId;
+        });
+      }
+    }
+  </script>
+  <div class="header">
+    <a href="#default" class="logo">SafeMe</a>
+    <div class="header-right">
+      <a class="active" href="#home">Home</a>
+      <a href="#contact">Contact</a>
+      <a href="#about">About</a>
     </div>
-    </div>
-    <title>SafeMe</title>
+  </div>
+  </div>
+  <title>SafeMe</title>
 </head>
 
 <body onload="initialize()">
-    <div class="row" style="margin: 20px;">
-        <div class="col-md-3 text-center">
-            <h4>
-                <br>Find A Route</h4>
-            <br>
-            <div class="form-group" id="locationField">
-                <label for="orgin">Orgin:</label>
-                <input type="text" class="autocomplete form-control" id="ac1" placeholder="Enter your address"></input>
-            </div>
-            <div class="form-group" id="locationField">
-                <label for="destination">Destination:</label>
-                <input type="text" class="autocomplete form-control" id="ac2" placeholder="Enter your address"></input>
-            </div>
-            <button type="button" class="btn btn-primary" id="go">Go</button>
-            <br>
-            <br>
+  <div class="row" style="margin: 20px;">
+    <div class="col-md-3 text-center">
+      <h4>
+        <br>Find A Route</h4>
+      <br>
+      <div class="form-group" id="locationField">
+        <label for="orgin">Orgin:</label>
+        <input type="text" class="autocomplete form-control" id="ac1" placeholder="Enter your address"></input>
+      </div>
+      <div class="form-group" id="locationField">
+        <label for="destination">Destination:</label>
+        <input type="text" class="autocomplete form-control" id="ac2" placeholder="Enter your address"></input>
+      </div>
+      <button type="button" class="btn btn-primary" id="go">Go</button>
+      <br>
+      <br>
 
-            <h4>
-                <br>Add A Route</h4>
-            <br>
-            <div class="form-group">
-                <label for="start">Start Location:</label>
-                <label class="switch">
-                    <input id="start-switch" type="checkbox" onchange="toggle(this)">
-                    <span class="slider round"></span>
-                </label>
-                <input type="text" class="form-control" id="start" placeholder="Pin a location">
-            </div>
-            <div class="form-group">
-                <label for="end">End Location:</label>
-                <label class="switch">
-                    <input id="end-switch" type="checkbox" onchange="toggle(this)">
-                    <span class="slider round"></span>
-                </label>
-                <input type="text" class="form-control" id="end" placeholder="Pin a location">
-            </div>
-            <div class="form group">
-                <label for="safe">Was it Safe?</label>
-                <select class="form-control" id="safe">
-                    <option>Select</option>
-                    <option>Very Unsafe</option>
-                    <option>Slightly Unsafe</option>
-                    <option>Slightly Safe</option>
-                    <option>Very Safe</option>
-                </select>
-            </div>
-            <br>
-            <button type="button" class="btn btn-primary" id="submit">Submit</button>
-            <br>
-            <br>
-        </div>
-        <div class="col-md-9 ">
-            <div style="width: 100%; height: 100%;" id="map-container"></div>
-        </div>
+      <h4>
+        <br>Add A Route</h4>
+      <br>
+      <div class="form-group">
+        <label for="start">Start Location:</label>
+        <label class="switch">
+          <input id="start-switch" type="checkbox" onchange="toggle(this)">
+          <span class="slider round"></span>
+        </label>
+        <input type="text" class="form-control" id="start" placeholder="Pin a location">
+      </div>
+      <div class="form-group">
+        <label for="end">End Location:</label>
+        <label class="switch">
+          <input id="end-switch" type="checkbox" onchange="toggle(this)">
+          <span class="slider round"></span>
+        </label>
+        <input type="text" class="form-control" id="end" placeholder="Pin a location">
+      </div>
+      <div class="form group">
+        <label for="safe">Was it Safe?</label>
+        <select class="form-control" id="safe">
+          <option>Select</option>
+          <option>Very Unsafe</option>
+          <option>Slightly Unsafe</option>
+          <option>Slightly Safe</option>
+          <option>Very Safe</option>
+        </select>
+      </div>
+      <br>
+      <button type="button" class="btn btn-primary" id="submit">Submit</button>
+      <br>
+      <br>
+    </div>
+    <div class="col-md-9 ">
+      <div style="width: 100%; height: 100%;" id="map-container"></div>
+    </div>
 
-        <script src="assets/js/jquery-3.3.1.min.js "></script>
-        <script src="assets/js/bootstrap.min.js "></script>
-        <script type="text/javascript" charset="UTF-8" src="https://js.cit.api.here.com/v3/3.0/mapsjs-core.js"></script>
-        <script type="text/javascript" charset="UTF-8" src="https://js.cit.api.here.com/v3/3.0/mapsjs-service.js"></script>
-        <script type="text/javascript" charset="UTF-8" src="https://js.cit.api.here.com/v3/3.0/mapsjs-ui.js"></script>
-        <script type="text/javascript" charset="UTF-8" src="https://js.cit.api.here.com/v3/3.0/mapsjs-mapevents.js"></script>
-        <script src="general.js"></script>
+    <script src="assets/js/jquery-3.3.1.min.js "></script>
+    <script src="assets/js/bootstrap.min.js "></script>
+    <script type="text/javascript" charset="UTF-8" src="https://js.cit.api.here.com/v3/3.0/mapsjs-core.js"></script>
+    <script type="text/javascript" charset="UTF-8" src="https://js.cit.api.here.com/v3/3.0/mapsjs-service.js"></script>
+    <script type="text/javascript" charset="UTF-8" src="https://js.cit.api.here.com/v3/3.0/mapsjs-ui.js"></script>
+    <script type="text/javascript" charset="UTF-8" src="https://js.cit.api.here.com/v3/3.0/mapsjs-mapevents.js"></script>
+    <script src="general.js"></script>
 </body>
 
 </html>

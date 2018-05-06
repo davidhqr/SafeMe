@@ -92,15 +92,14 @@ var bubble;
 $(() => {
     document.getElementById("start-switch").checked = true;
     $("#go").click(() => {
-        var origin = getCoords($("#origin").val());
-        var destination = getCoords($("#destination").val());
-        console.log(origin);
-        calculateRoute(platform, origin, destination);
+        if (!$('#go').hasClass("disabled")) {
+            getCoords($("#ac1").val(), $("#ac2").val());
+        }
     });
 
     $("#submit").click(() => {
-        var message = { Origin: $("#origin").val(), Destination: $("#destination").val() };
-        //$.post('http://localhost:3000/messages', message);
+        var message = { Start: $("#start").val(), End: $("#end").val(), Safe: $("#safe").val() };
+        $.post('http://localhost:3000/messages', message);
     });
 });
 
@@ -120,13 +119,19 @@ function toggle(element) {
     }
 }
 
-function getCoords(stringLoc) {
+function getCoords(origin, destination) {
     var geocoder = platform.getGeocodingService();
-    var geocodingParams = { searchText: stringLoc };
-    var location;
-    geocoder.geocode(geocodingParams, (result) => {
-        location = String(result.Response.View[0].Result[0].Location.DisplayPosition.Latitude) + ","
+    geocoder.geocode({ searchtext: origin }, (result) => {
+        var location1 = String(result.Response.View[0].Result[0].Location.DisplayPosition.Latitude) + ","
             + String(result.Response.View[0].Result[0].Location.DisplayPosition.Longitude);
+        geocoder.geocode({ searchtext: destination }, (result1) => {
+            var location2 = String(result1.Response.View[0].Result[0].Location.DisplayPosition.Latitude) + ","
+                + String(result1.Response.View[0].Result[0].Location.DisplayPosition.Longitude);
+            calculateRoute(platform, location1, location2);
+        }, (error) => {
+            alert("error!");
+            return;
+        });
     }, (error) => {
         alert("error!");
         return;
@@ -141,14 +146,14 @@ function calculateRoute(platform, origin, destination) {
         representation: 'display',
         routeattributes: 'summary,shape,legs',
         maneuverattributes: 'direction,action',
-        waypoint0: "43.6629,-79.3957",
-        waypoint1: "43.7615,-79.4111"
+        waypoint0: origin,
+        waypoint1: destination
     };
     router.calculateRoute(routeRequestParams, (result) => {
-        console.log(result);
         var route = result.response.route[0];
         addRouteShapeToMap(route);
         addManueversToMap(route);
+        $('#go').addClass("disabled");
     }, (error) => {
         alert('Ooops!');
     });
