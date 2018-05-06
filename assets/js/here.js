@@ -4,6 +4,12 @@ var platform = new H.service.Platform({
   'app_code': '_q7W4N0oGEkEG5RvgTXM0g'
 });
 
+
+window.addEventListener('resize', function () {
+  map.getViewPort().resize();
+});
+
+
 var mapContainer = document.getElementById('map-container');
 
 var defaultLayers = platform.createDefaultLayers();
