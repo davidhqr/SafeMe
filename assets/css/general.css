@@ -58,7 +58,12 @@ h1, h2, h3, h4, h5, h6 {
   }
 
   .map {
-    width: 100vw;
-    height: 100vh;
     position: relative;
+    width: 50%;
+    }
+    
+  .map:after {
+    content: ""; 
+    display: block; 
+    padding-bottom: 100%;
     }
