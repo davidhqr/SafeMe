@@ -38,7 +38,9 @@
     <div class="row" style="margin: 20px;">
         <div class="col-md-3 text-center">
             <h4>
-                <br>Find A Route</h4>
+                <br>
+                <u>Find A Route</u>
+            </h4>
             <br>
             <div class="form-group" id="locationField">
                 <label for="orgin">Orgin:</label>
@@ -48,12 +50,16 @@
                 <label for="destination">Destination:</label>
                 <input type="text" class="autocomplete form-control" id="ac2" placeholder="Enter your address"></input>
             </div>
+            <button onclick="document.getElementById('ac1').value=''; document.getElementById('ac2').value=''" type="button" class="btn btn-default"
+                id="clear">Clear</button>
             <button type="button" class="btn btn-primary" id="go">Go</button>
             <br>
             <br>
 
             <h4>
-                <br>Add A Route</h4>
+                <br>
+                <u>Add A Route</u>
+            </h4>
             <br>
             <div class="form-group">
                 <label for="start">Start Location:</label>
@@ -82,6 +88,8 @@
                 </select>
             </div>
             <br>
+            <button onclick="document.getElementById('start').value=''; document.getElementById('end').value=''; 
+            document.getElementById('safe').value='Select'" type="button" class="btn btn-default" id="clear">Clear</button>
             <button type="button" class="btn btn-primary" id="submit">Submit</button>
             <br>
             <br>
