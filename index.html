@@ -36,67 +36,67 @@
 </head>
 
 <body onload="initialize()">
-    <div class="row" style="margin: 20px;">
-        <div class="col-md-3 text-center">
-            <h4>
-                <br>
-                <u>Find A Route</u>
-            </h4>
-            <br>
-            <div class="form-group" id="locationField">
-                <label for="orgin">Orgin:</label>
-                <input type="text" class="autocomplete form-control" id="ac1" placeholder="Enter your address"></input>
-            </div>
-            <div class="form-group" id="locationField">
-                <label for="destination">Destination:</label>
-                <input type="text" class="autocomplete form-control" id="ac2" placeholder="Enter your address"></input>
-            </div>
-            <button onclick="document.getElementById('ac1').value=''; document.getElementById('ac2').value=''" type="button" class="btn btn-default"
-                id="clear1">Clear</button>
-            <button type="button" class="btn btn-primary" id="go">Go</button>
-            <br>
-            <br>
+  <div class="row" style="margin: 20px;">
+    <div class="col-md-3 text-center">
+      <h4>
+        <br>
+        <u>Find A Route</u>
+      </h4>
+      <br>
+      <div class="form-group" id="locationField">
+        <label for="orgin">Orgin:</label>
+        <input type="text" class="autocomplete form-control" id="ac1" placeholder="Enter an address"></input>
+      </div>
+      <div class="form-group" id="locationField">
+        <label for="destination">Destination:</label>
+        <input type="text" class="autocomplete form-control" id="ac2" placeholder="Enter an address"></input>
+      </div>
+      <button onclick="window.location.reload()" type="button" class="btn btn-default"
+        id="clear1">Clear</button>
+      <button type="button" class="btn btn-primary" id="go">Go</button>
+      <br>
+      <br>
 
-            <h4>
-                <br>
-                <u>Add A Route</u>
-            </h4>
-            <br>
-            <div class="form-group">
-                <label for="start">Start Location:</label>
-                <label class="switch">
-                    <input id="start-switch" type="checkbox" onchange="toggle(this)">
-                    <span class="slider round"></span>
-                </label>
-                <input type="text" class="form-control" id="start" placeholder="Pin a location">
-            </div>
-            <div class="form-group">
-                <label for="end">End Location:</label>
-                <label class="switch">
-                    <input id="end-switch" type="checkbox" onchange="toggle(this)">
-                    <span class="slider round"></span>
-                </label>
-                <input type="text" class="form-control" id="end" placeholder="Pin a location">
-            </div>
-            <div class="form group">
-                <label for="safe">Was it Safe?</label>
-                <select class="form-control" id="safe">
-                    <option>Select</option>
-                    <option>Very Unsafe</option>
-                    <option>Slightly Unsafe</option>
-                    <option>Slightly Safe</option>
-                    <option>Very Safe</option>
-                </select>
-            </div>
-            <br>
-            <button type="button" class="btn btn-default" id="clear2">Clear</button>
-            <button type="button" class="btn btn-primary" id="submit">Submit</button>
-            <br>
-            <br>
-        </div>
-        <div class="col-md-9 ">
-            <div style="width: 100%; height: 100%;" id="map-container"></div>
-        </div>
+      <h4>
+        <br>
+        <u>Add A Region</u>
+      </h4>
+      <br>
+      <div class="form-group">
+        <label for="start">1st Corner:</label>
+        <label class="switch">
+          <input id="start-switch" type="checkbox" onchange="toggle(this)">
+          <span class="slider round"></span>
+        </label>
+        <input type="text" class="form-control" id="start" placeholder="Click map to pin location">
+      </div>
+      <div class="form-group">
+        <label for="end">2nd Corner:</label>
+        <label class="switch">
+          <input id="end-switch" type="checkbox" onchange="toggle(this)">
+          <span class="slider round"></span>
+        </label>
+        <input type="text" class="form-control" id="end" placeholder="Click map to pin location">
+      </div>
+      <div class="form group">
+        <label for="safe">Did You Feel Safe?</label>
+        <select class="form-control" id="safe">
+          <option>Select</option>
+          <option>Very Unsafe</option>
+          <option>Slightly Unsafe</option>
+          <option>Slightly Safe</option>
+          <option>Very Safe</option>
+        </select>
+      </div>
+      <br>
+      <button type="button" class="btn btn-default" id="clear2">Clear</button>
+      <button type="button" class="btn btn-primary" id="submit">Submit</button>
+      <br>
+      <br>
+    </div>
+    <div class="col-md-9 ">
+      <div style="width: 100%; height: 100%;" id="map-container"></div>
+    </div>
 
     <script src="assets/js/jquery-3.3.1.min.js "></script>
     <script src="assets/js/bootstrap.min.js "></script>

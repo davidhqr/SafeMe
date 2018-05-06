@@ -98,6 +98,10 @@ $(() => {
     });
 
     $("#submit").click(() => {
+        if ($("#safe").val() === "Select") {
+            alert("Please select how safe you felt.");
+            return;
+        }
         var message = { Start: $("#start").val(), End: $("#end").val() };
         var end = document.getElementById('end').value;
         var ends = end.split(",");
