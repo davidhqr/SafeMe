@@ -124,7 +124,7 @@ $(() => {
         }
 
         if ($("#safe").val() === "Very Unsafe" || $("#safe").val() === "Slightly Unsafe") {
-            $.post('http://localhost:3000/messages', message);
+            $.post('http://localhost:80/messages', message);
         }
         alert("Submitted! Route guidance will take this region into account.");
     });

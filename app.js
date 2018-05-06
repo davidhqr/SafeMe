@@ -15,7 +15,7 @@ mongoose.connect(dbUrl, (error) => {
     console.log("MongoDB connection:", error);
 });
 
-app.listen(3000);
+app.listen(80);
 
 var Message = mongoose.model('Message', {
     Lat1: String,
