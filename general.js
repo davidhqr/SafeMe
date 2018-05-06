@@ -100,6 +100,25 @@ $(() => {
     $("#submit").click(() => {
         var message = { Start: $("#start").val(), End: $("#end").val(), Safe: $("#safe").val() };
         $.post('http://localhost:3000/messages', message);
+        $('#start').val('');
+        $('#end').val('');
+        $('#safe').val('Select');
+        document.getElementById('start-switch').checked = true;
+        document.getElementById('end-switch').checked = false;
+        document.getElementById("start").disabled = false;
+        document.getElementById("end").disabled = false;
+    });
+
+    $("#clear").click(() => {
+        var message = { Start: $("#start").val(), End: $("#end").val(), Safe: $("#safe").val() };
+        $.post('http://localhost:3000/messages', message);
+        $('#start').val('');
+        $('#end').val('');
+        $('#safe').val('Select');
+        document.getElementById('start-switch').checked = true;
+        document.getElementById('end-switch').checked = false;
+        document.getElementById("start").disabled = false;
+        document.getElementById("end").disabled = false;
     });
 });
 
@@ -107,14 +126,22 @@ function toggle(element) {
     if (element.checked) {
         if (element.id === "start-switch") {
             document.getElementById('end-switch').checked = false;
+            document.getElementById("end").disabled = true;
+            document.getElementById("start").disabled = false;
         } else {
             document.getElementById('start-switch').checked = false;
+            document.getElementById("start").disabled = true;
+            document.getElementById("end").disabled = false;
         }
     } else {
         if (element.id === "start-switch") {
             document.getElementById('end-switch').checked = true;
+            document.getElementById("start").disabled = true;
+            document.getElementById("end").disabled = false;
         } else {
             document.getElementById('start-switch').checked = true;
+            document.getElementById("end").disabled = true;
+            document.getElementById("start").disabled = false;
         }
     }
 }
