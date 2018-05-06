@@ -19,6 +19,26 @@ var mapOptions = {
 
 var map = new H.Map(mapContainer, defaultLayers.normal.map, mapOptions);
 var behavior = new H.mapevents.Behavior(new H.mapevents.MapEvents(map));
+var currentRect;
+
+function getRect(lat1, lng1, lat2, lng2) {
+    var rect;
+    if (lat1 > lat2) {
+        if (lng1 > lng2) {
+            rect = new H.map.Rect(new H.geo.Rect(lat1, lng2, lat2, lng1));
+        } else {
+            rect = new H.map.Rect(new H.geo.Rect(lat1, lng1, lat2, lng2));
+        }
+    } else {
+        if (lng1 > lng2) {
+            rect = new H.map.Rect(new H.geo.Rect(lat2, lng2, lat1, lng1));
+        } else {
+            rect = new H.map.Rect(new H.geo.Rect(lat2, lng1, lat1, lng2));
+        }
+    }
+    return rect;
+}
+
 function setUpClickListener(amap) {
     // Attach an event listener to map display
     // obtain the coordinates and display in an alert box.
@@ -33,57 +53,38 @@ function setUpClickListener(amap) {
             document.getElementById('start').value = coordStr;
             var end = document.getElementById('end').value;
             var nums = end.split(",");
+            if (nums == null || nums.length < 2) {
+                return;
+            }
             for (var i = 0; i < nums.length; i++) {
-                nums[i] = parseInt(nums[i]);
+                nums[i] = parseFloat(nums[i]);
             }
-            var rect;
-            if (lat > nums[0]) {
-                if (lng > nums[1]) {
-                    console.log("1");
-                    rect = new H.map.Rect(new H.geo.Rect(lat, nums[1], nums[0], lng));
-                } else {
-                    rect = new H.map.Rect(new H.geo.Rect(lat, lng, nums[0], nums[1]));
-                    console.log("2");
-                }
-            } else {
-                if (lng > nums[1]) {
-                    rect = new H.map.Rect(new H.geo.Rect(nums[0], nums[1], lat, lng));
-                    console.log("3");
-                } else {
-                    rect = new H.map.Rect(new H.geo.Rect(nums[0], lng, lat, nums[1]));
-                    console.log("4");
-                }
-            }
+            var rect = getRect(lat, lng, nums[0], nums[1]);
             map.addObject(rect);
+            if (currentRect != null) {
+                map.removeObject(currentRect);
+            }
+            currentRect = rect;
         } else {
             document.getElementById('end').value = coordStr;
             var start = document.getElementById('start').value;
             var nums = start.split(",");
+            if (nums == null || nums.length < 2) {
+                return;
+            }
             for (var i = 0; i < nums.length; i++) {
-                nums[i] = parseInt(nums[i]);
+                nums[i] = parseFloat(nums[i]);
             }
-            var rect;
-            if (lat > nums[0]) {
-                if (lng > nums[1]) {
-                    console.log("1");
-                    rect = new H.map.Rect(new H.geo.Rect(lat, nums[1], nums[0], lng));
-                } else {
-                    rect = new H.map.Rect(new H.geo.Rect(lat, lng, nums[0], nums[1]));
-                    console.log("2");
-                }
-            } else {
-                if (lng > nums[1]) {
-                    rect = new H.map.Rect(new H.geo.Rect(nums[0], nums[1], lat, lng));
-                    console.log("3");
-                } else {
-                    rect = new H.map.Rect(new H.geo.Rect(nums[0], lng, lat, nums[1]));
-                    console.log("4");
-                }
-            }
+            var rect = getRect(lat, lng, nums[0], nums[1]);
             map.addObject(rect);
+            if (currentRect != null) {
+                map.removeObject(currentRect);
+            }
+            currentRect = rect;
         }
     });
 }
+
 setUpClickListener(map);
 var ui = H.ui.UI.createDefault(map, defaultLayers);
 var bubble;
@@ -91,14 +92,15 @@ var bubble;
 $(() => {
     document.getElementById("start-switch").checked = true;
     $("#go").click(() => {
-        var message = { Origin: $("#origin").val(), Destination: $("#destination").val() };
-        //$.post('http://localhost:3000/messages', message);
         var origin = getCoords($("#origin").val());
         var destination = getCoords($("#destination").val());
         console.log(origin);
         calculateRoute(platform, origin, destination);
     });
-    map.addObject(new H.map.Rect(new H.geo.Rect(43.6652,-79.4101, 43.6538,-79.3610)));
+
+    $("#submit").click(() => {
+
+    }
 });
 
 function toggle(element) {
