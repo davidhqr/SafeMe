@@ -91,6 +91,7 @@ var bubble;
 
 $(() => {
     document.getElementById("start-switch").checked = true;
+    
     $("#go").click(() => {
         if (!$('#go').hasClass("disabled")) {
             getCoords($("#ac1").val(), $("#ac2").val());
