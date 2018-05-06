@@ -99,8 +99,9 @@ $(() => {
     });
 
     $("#submit").click(() => {
-
-    }
+        var message = { Origin: $("#origin").val(), Destination: $("#destination").val() };
+        //$.post('http://localhost:3000/messages', message);
+    });
 });
 
 function toggle(element) {
