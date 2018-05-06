@@ -178,6 +178,14 @@ function calculateRoute(platform, origin, destination) {
             if (i < data.length - 1) {
                 append += "!";
             }
+            console.log(append);
+            rect = new H.geo.Rect(data[i].Lat1, data[i].Lng2, data[i].Lat2, data[i].Lng1);
+            map.addObject(new H.map.Rect(rect, {
+                style: {
+                    fillColor: 'rgba(244, 121, 131, 0.5)',
+                    strokeColor: 'rgb(195, 39, 43)',
+                },
+            }));
         }
         var routeRequestParams = {
             mode: 'fastest;pedestrian',
