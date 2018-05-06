@@ -19,8 +19,38 @@ var mapOptions = {
 
 var map = new H.Map(mapContainer, defaultLayers.normal.map, mapOptions);
 var behavior = new H.mapevents.Behavior(new H.mapevents.MapEvents(map));
+function setUpClickListener(amap) {
+    // Attach an event listener to map display
+    // obtain the coordinates and display in an alert box.
+    map.addEventListener('tap', function (evt) {
+        console.log("test");
+        var coord = amap.screenToGeo(evt.currentPointer.viewportX,
+            evt.currentPointer.viewportY);
+        alert('Clicked at ' + Math.abs(coord.lat.toFixed(4)) +
+            ((coord.lat > 0) ? 'N' : 'S') +
+            ' ' + Math.abs(coord.lng.toFixed(4)) +
+            ((coord.lng > 0) ? 'E' : 'W'));
+    });
+}
+//setUpClickListener(map);
 var ui = H.ui.UI.createDefault(map, defaultLayers);
 var bubble;
+
+maptypes = platform.createDefaultLayers(256, 160, false, false, null, /*pois*/ true);
+// Add metainfo layer to the map:
+map.addLayer(maptypes.normal.metaInfo);
+// Store a reference to the metaInfo TileProvider:
+var tileProvider = maptypes.normal.metaInfo.getProvider();
+// Add a listener for pointerdown events -- it displays an info bubble with the POI
+// name when the map user clicks on the POI:
+tileProvider.addEventListener('pointerdown', function (e) {
+    // Get the spatial object on which the user clicked:
+    // Translate the screen coordinates of the click to lat/lon:
+    coord = map.screenToGeo(e.viewportX, e.viewportY);
+    // Display an info bubble with the name of the object at the location of the click:
+    var bubble = new H.ui.InfoBubble(coord, { content: "test"});
+    ui.addBubble(bubble);
+});
 
 $(() => {
     $("#go").click(() => {
