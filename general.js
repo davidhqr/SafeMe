@@ -98,8 +98,30 @@ $(() => {
     });
 
     $("#submit").click(() => {
-        var message = { Start: $("#start").val(), End: $("#end").val(), Safe: $("#safe").val() };
-        $.post('http://localhost:3000/messages', message);
+        var message = { Start: $("#start").val(), End: $("#end").val() };
+        var end = document.getElementById('end').value;
+        var ends = end.split(",");
+        var start = document.getElementById('start').value;
+        var starts = start.split(",");
+
+        if (starts[0] > ends[0]) {
+            if (starts[1] > ends[1]) {
+                message = { Lat1: starts[0], Lng1: ends[1], Lat2: ends[0], Lng2: starts[1] };
+            } else {
+                message = { Lat1: starts[0], Lng1: starts[1], Lat2: ends[0], Lng2: ends[1] };
+            }
+        } else {
+            if (starts[1] > ends[1]) {
+                message = { Lat1: ends[0], Lng1: ends[1], Lat2: starts[0], Lng2: starts[1] };
+            } else {
+                message = { Lat1: ends[0], Lng1: starts[1], Lat2: starts[0], Lng2: ends[1] };
+            }
+        }
+
+        if ($("#safe").val() === "Very Unsafe" || $("#safe").val() === "Slightly Unsafe") {
+            $.post('http://localhost:3000/messages', message);
+        }
+        alert("Submitted! Route guidance will take this region into account.");
     });
 });
 
@@ -140,22 +162,33 @@ function getCoords(origin, destination) {
 }
 
 function calculateRoute(platform, origin, destination) {
-    var router = platform.getRoutingService();
-    var routeRequestParams = {
-        mode: 'fastest;pedestrian',
-        representation: 'display',
-        routeattributes: 'summary,shape,legs',
-        maneuverattributes: 'direction,action',
-        waypoint0: origin,
-        waypoint1: destination
-    };
-    router.calculateRoute(routeRequestParams, (result) => {
-        var route = result.response.route[0];
-        addRouteShapeToMap(route);
-        addManueversToMap(route);
-        $('#go').addClass("disabled");
-    }, (error) => {
-        alert('Ooops!');
+    $.get('http://localhost:3000/messages', (data) => {
+        var router = platform.getRoutingService();
+        var append = "";
+        for (var i = 0; i < data.length; i++) {
+            append += data[i].Lat1 + "," + data[i].Lng1 + ";" + data[i].Lat2 + "," + data[i].Lng2;
+            if (i < data.length - 1) {
+                append += "!";
+            }
+        }
+        var routeRequestParams = {
+            mode: 'fastest;pedestrian',
+            representation: 'display',
+            routeattributes: 'summary,shape,legs',
+            maneuverattributes: 'direction,action',
+            waypoint0: origin,
+            waypoint1: destination,
+            avoidareas: append
+        };
+        router.calculateRoute(routeRequestParams, (result) => {
+            console.log(result);
+            var route = result.response.route[0];
+            addRouteShapeToMap(route);
+            addManueversToMap(route);
+            $('#go').addClass("disabled");
+        }, (error) => {
+            alert('Ooops!');
+        });
     });
 }
 

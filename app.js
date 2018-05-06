@@ -18,9 +18,10 @@ mongoose.connect(dbUrl, (error) => {
 app.listen(3000);
 
 var Message = mongoose.model('Message', {
-    Start: String,
-    End: String,
-    Safe: String
+    Lat1: String,
+    Lng1: String,
+    Lat2: String,
+    Lng2: String
 })
 
 app.get('/messages', (req, res) => {
